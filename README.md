@@ -1,7 +1,3 @@
-Para cumplir estrictamente con los lineamientos de tu evaluación, el archivo `README.md` debe estar estructurado en Markdown e incluir las instrucciones paso a paso para clonar, configurar las variables de entorno (`.env`), migrar la base de datos y levantar la aplicación para la revisión cruzada (Peer Review).
-
-Abre o crea el archivo `README.md` en la **raíz de tu proyecto** y pega esta estructura base. Está redactada con lo que ya tenemos configurado y dejaremos espacios (marcados como "Próximamente") para lo que falta:
-
 ```markdown
 # Proyecto Concesionaria
 

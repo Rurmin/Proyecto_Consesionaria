@@ -1,6 +1,7 @@
 using DotNetEnv;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,7 @@ var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Add services to the container.
-// ... tus otras configuraciones (builder.Services.AddControllers, etc.)
+builder.Services.AddScoped<AuthService>();
 
 // 1. Definir la política CORS
 builder.Services.AddCors(options =>
