@@ -1,7 +1,7 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <HelloWorld />
+  <router-view />
 </template>
+
+<script setup>
+// router-view se encarga de inyectar la vista correspondiente a la URL actual
+</script>
