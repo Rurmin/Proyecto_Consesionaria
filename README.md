@@ -22,7 +22,7 @@ Para ejecutar este proyecto de manera local, necesitas tener instalado:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone [https://github.com/TU_USUARIO/Proyecto_Consesionaria.git](https://github.com/TU_USUARIO/Proyecto_Consesionaria.git)
+git clone [https://github.com/Rurmin/Proyecto_Consesionaria.git](https://github.com/Rurmin/Proyecto_Consesionaria.git)
 cd Proyecto_Consesionaria
 
 ```

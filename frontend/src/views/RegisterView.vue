@@ -4,18 +4,19 @@ import { useRouter } from 'vue-router'
 import api from '@/api/axios'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 
 const username = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 const errorMessage = ref('')
+const successMessage = ref('')
 const isLoading = ref(false)
 const router = useRouter()
 
 const handleRegister = async () => {
   errorMessage.value = ''
+  successMessage.value = ''
 
   if (password.value !== confirmPassword.value) {
     errorMessage.value = 'Las contraseñas no coinciden'
@@ -32,8 +33,13 @@ const handleRegister = async () => {
       username: username.value
     })
 
-    alert(response.data.message || '¡Cuenta creada con éxito!')
-    router.push('/login')
+    // Mensaje en verde debajo del título
+    successMessage.value = response.data.message || '¡Cuenta creada con éxito!'
+
+    // Redirección al login tras 1.5 segundos
+    setTimeout(() => {
+      router.push('/login')
+    }, 1500)
 
   } catch (error) {
     if (error.response?.data) {
@@ -74,8 +80,13 @@ const handleRegister = async () => {
       </CardHeader>
 
       <CardContent>
+        <!-- Mensajes de Estado -->
         <p v-if="errorMessage" class="text-xs md:text-sm text-red-400 text-center font-semibold mb-4">
           {{ errorMessage }}
+        </p>
+
+        <p v-if="successMessage" class="text-xs md:text-sm text-emerald-400 text-center font-semibold mb-4">
+          {{ successMessage }}
         </p>
 
         <form @submit.prevent="handleRegister" class="space-y-4 md:space-y-5">
@@ -107,9 +118,13 @@ const handleRegister = async () => {
             <Input v-model="confirmPassword" placeholder="Confirmar contraseña" type="password" required class="bg-transparent border-none outline-none text-[#d3d3d3] w-full p-0 h-auto focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none text-sm md:text-base" />
           </div>
 
-          <Button type="submit" :disabled="isLoading" class="w-full bg-[#0891b2] hover:bg-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] text-white font-bold rounded-xl py-6 md:py-7 transition-all duration-300 mt-4 text-sm md:text-base">
+          <button 
+            type="submit" 
+            :disabled="isLoading" 
+            class="w-full bg-cyan-600 hover:bg-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] text-white border-none font-bold rounded-xl py-4 transition-all duration-300 mt-4 text-sm md:text-base cursor-pointer"
+          >
             {{ isLoading ? 'Registrando...' : 'Registrarse' }}
-          </Button>
+          </button>
         </form>
       </CardContent>
 

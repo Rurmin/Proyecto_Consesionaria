@@ -42,18 +42,18 @@ const cerrarSesion = async () => {
       
       <!-- Logo -->
       <div class="flex items-center shrink-0">
-        <img src="@/assets/logo.png" alt="Pegasus Logo" class="h-10 md:h-14 w-auto object-contain invert mix-blend-screen" />
+       <span class="text-2xl md:text-3xl font-black text-white tracking-widest">PEGASUS</span>
       </div>
       
       <div class="flex items-center gap-2 md:gap-4">
         
         <template v-if="!usuarioSesion">
-          <Button @click="irARegistro" variant="outline" class="bg-transparent border-slate-700 text-white hover:bg-slate-800 hover:text-white font-bold px-3 py-2 md:px-6 text-xs md:text-sm h-9 md:h-10">
-            Registro
-          </Button>
-          <Button @click="irALogin" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-3 py-2 md:px-6 text-xs md:text-sm h-9 md:h-10">
-            Iniciar Sesión
-          </Button>
+            <Button @click="irARegistro" variant="outline" class="!bg-transparent !border-slate-700 !text-white hover:!bg-slate-800 font-bold px-3 py-2 md:px-6 text-xs md:text-sm h-9 md:h-10">
+              Registro
+            </Button>
+            <Button @click="irALogin" class="!bg-cyan-600 hover:!bg-cyan-500 !text-white !border-none font-bold px-3 py-2 md:px-6 text-xs md:text-sm h-9 md:h-10">
+              Iniciar Sesión
+            </Button>
         </template>
 
         <template v-else>

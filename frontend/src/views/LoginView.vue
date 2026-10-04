@@ -16,28 +16,29 @@ const credentials = ref({
 })
 
 const procesarLogin = async () => {
-  isLoading.value = true
-  errorMessage.value = ''
+  console.log("1. Botón nativo presionado. Datos capturados:", credentials.value);
+  isLoading.value = true;
+  errorMessage.value = '';
   
   try {
-    const response = await api.post('/auth/login', credentials.value)
+    console.log("2. Viajando al backend...");
+    const response = await api.post('/auth/login', credentials.value);
+    console.log("3. Respuesta del backend exitosa:", response.data);
     
-    // Guardar datos básicos del usuario para sincronización con el header de HomeView
-    const usuario = response.data?.user || response.data?.User
+    const usuario = response.data?.user || response.data?.User;
     if (usuario) {
-      localStorage.setItem('pegasus_user', JSON.stringify(usuario))
+      localStorage.setItem('pegasus_user', JSON.stringify(usuario));
     }
-
-    // Redirección unificada
-    router.push('/menu')
+    router.push('/menu');
   } catch (error) {
+    console.error("4. El backend rechazó la petición:", error.response?.data || error);
     if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
+      errorMessage.value = error.response.data.message;
     } else {
-      errorMessage.value = 'Credenciales inválidas o error de conexión.'
+      errorMessage.value = 'Credenciales inválidas o error de conexión.';
     }
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
 }
 </script>
@@ -82,9 +83,14 @@ const procesarLogin = async () => {
             <Input v-model="credentials.password" placeholder="Contraseña" type="password" required class="bg-transparent border-none outline-none text-[#d3d3d3] w-full p-0 h-auto focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none text-sm md:text-base" />
           </div>
 
-          <Button type="submit" :disabled="isLoading" class="w-full bg-[#0891b2] hover:bg-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] text-white font-bold rounded-xl py-6 md:py-7 transition-all duration-300 mt-4 text-sm md:text-base">
-            {{ isLoading ? 'Iniciando...' : 'Iniciar Sesión' }}
-          </Button>
+          <!-- Reemplazamos <Button> por la etiqueta nativa <button> -->
+    <button 
+      type="submit" 
+      :disabled="isLoading" 
+      class="w-full bg-cyan-600 hover:bg-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] text-white border-none font-bold rounded-xl py-4 transition-all duration-300 mt-4 text-sm md:text-base cursor-pointer"
+    >
+      {{ isLoading ? 'Iniciando...' : 'Iniciar Sesión' }}
+    </button>
         </form>
       </CardContent>
 
